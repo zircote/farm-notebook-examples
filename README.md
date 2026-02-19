@@ -1,8 +1,8 @@
-# {{notebook_project}}
+# farm-notebook
 
 <!-- Badges -->
 [![GitHub Template](https://img.shields.io/badge/template-zircote%2Fnotebook--template-blue?logo=github)](https://github.com/zircote/notebook-template)
-[![CI](https://github.com/zircote/{{notebook_project}}/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/{{notebook_project}}/actions/workflows/ci.yml)
+[![CI](https://github.com/zircote/farm-notebook/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/farm-notebook/actions/workflows/ci.yml)
 [![Python Version](https://img.shields.io/badge/python-3.12%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Jupyter](https://img.shields.io/badge/jupyter-notebook-f37626?logo=jupyter&logoColor=white)](https://jupyter.org/)
@@ -23,8 +23,8 @@ A collection of Jupyter notebooks for experiments and learning.
 
 ```bash
 # Clone the repository
-git clone https://github.com/zircote/{{notebook_project}}.git
-cd {{notebook_project}}
+git clone https://github.com/zircote/farm-notebook.git
+cd farm-notebook
 
 # Install dependencies
 uv sync

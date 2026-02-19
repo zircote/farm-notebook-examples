@@ -1,5 +1,5 @@
 [project]
-name = "{{notebook_project}}"
+name = "farm-notebook"
 version = "0.1.0"
 description = "Jupyter notebooks for experiments and learning"
 readme = "README.md"
@@ -30,12 +30,12 @@ data = [
     "numpy>=2.0.0",
     "matplotlib>=3.9.0",
 ]
-all = ["{{notebook_project}}[dev,data]"]
+all = ["farm-notebook[dev,data]"]
 
 [project.urls]
-Homepage = "https://github.com/zircote/{{notebook_project}}"
-Repository = "https://github.com/zircote/{{notebook_project}}.git"
-Issues = "https://github.com/zircote/{{notebook_project}}/issues"
+Homepage = "https://github.com/zircote/farm-notebook"
+Repository = "https://github.com/zircote/farm-notebook.git"
+Issues = "https://github.com/zircote/farm-notebook/issues"
 
 [build-system]
 requires = ["hatchling>=1.21.0"]
