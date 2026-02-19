@@ -1,0 +1,66 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/mcp.json
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# uv
+uv.lock
+
+# ruff
+.ruff_cache/
+
+# Data files (add your data here, don't commit)
+data/
+*.csv
+*.xlsx
+*.parquet
+*.json
+!notebooks/*.json
+
+# Output files
+output/
+*.png
+*.jpg
+*.pdf
+*.html
+!notebooks/*.html
+
+# Secrets
+.secrets/
+secrets/
+credentials/
+*.local

@@ -1,0 +1,104 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint Notebooks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Lint notebooks with nbqa + ruff
+        run: uv run nbqa ruff notebooks/ --output-format=github
+
+  validate:
+    name: Validate Notebooks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --extra data
+
+      - name: Validate notebook structure
+        run: |
+          uv run python -c "
+          import json
+          import sys
+          from pathlib import Path
+
+          notebooks = list(Path('notebooks').glob('*.ipynb'))
+          if not notebooks:
+              print('No notebooks found')
+              sys.exit(0)
+
+          errors = []
+          for nb_path in notebooks:
+              try:
+                  with open(nb_path) as f:
+                      nb = json.load(f)
+                  assert 'cells' in nb, 'Missing cells'
+                  assert 'nbformat' in nb, 'Missing nbformat'
+                  print(f'Valid: {nb_path} ({len(nb[\"cells\"])} cells)')
+              except Exception as e:
+                  errors.append(f'{nb_path}: {e}')
+
+          if errors:
+              for err in errors:
+                  print(f'ERROR: {err}', file=sys.stderr)
+              sys.exit(1)
+          "
+
+  all-checks-pass:
+    name: All Checks Pass
+    if: always()
+    needs: [lint, validate]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all jobs passed
+        env:
+          LINT_RESULT: ${{ needs.lint.result }}
+          VALIDATE_RESULT: ${{ needs.validate.result }}
+        run: |
+          if [[ "$LINT_RESULT" != "success" ]] || \
+             [[ "$VALIDATE_RESULT" != "success" ]]; then
+            echo "One or more jobs failed"
+            exit 1
+          fi
+          echo "All checks passed!"
