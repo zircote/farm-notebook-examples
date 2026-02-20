@@ -22,6 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **SETUP.md** -- Detailed step-by-step guide (~1,000 lines) covering macOS, Linux, Windows (WSL + PowerShell), Google Colab, and GitHub Codespaces
 - **LICENSE** -- MIT license
 - **CI workflow** (`.github/workflows/ci.yml`) -- Lint and validate notebooks on push/PR
+- **Agentic workflows** (`.github/workflows/*.md + *.lock.yml`) -- Compiled gh-aw workflows for continuous quality monitoring:
+  - `daily-qa` -- Ad hoc quality assurance: checks builds, tests, docs, and creates GitHub discussions/issues with findings
+  - `ci-doctor` -- CI failure diagnosis and self-healing suggestions on workflow run failures
+  - `issue-triage` -- Automated issue labelling and initial response when new issues are opened
+  - `q` -- Conversational Q&A assistant triggered by `/q` comments on issues and PRs
+  - `update-docs` -- Keeps documentation synchronised with code changes on every push to main
+- **Dependabot configuration** (`.github/dependabot.yml`) -- Automated dependency updates for Python packages and GitHub Actions; `dependabot-automerge.yml` workflow auto-merges patch-level Dependabot PRs
+- **GitHub community files** -- Bug report and feature request issue templates (`.github/ISSUE_TEMPLATE/`), pull request template (`.github/PULL_REQUEST_TEMPLATE.md`), and `CODEOWNERS` defining review ownership
+- **GitHub Copilot instructions** (`.github/copilot-instructions.md`) -- Repository-level Copilot coding guidelines
+- **CLAUDE.md** -- AI assistant guidance for Claude Code (project structure, build commands, notebook best practices)
+- **Claude agent configurations** (`.claude/agents/`, `.claude/*.local.md`) -- Custom sub-agents for notebook development, documentation review, and GitHub social posts
 - **Social preview images** -- Light and dark SVG farm motifs with JPG conversions for GitHub
 - **README infographic** -- 7-notebook card layout SVG
 - **Shields.io badges** in README (MIT, Python 3.12+, Jupyter, NSIP)
