@@ -1,94 +1,100 @@
-# {{notebook_project}}
+# Farm Notebook Examples
 
-<!-- Badges -->
-[![GitHub Template](https://img.shields.io/badge/template-zircote%2Fnotebook--template-blue?logo=github)](https://github.com/zircote/notebook-template)
-[![CI](https://github.com/zircote/{{notebook_project}}/actions/workflows/ci.yml/badge.svg)](https://github.com/zircote/{{notebook_project}}/actions/workflows/ci.yml)
-[![Python Version](https://img.shields.io/badge/python-3.12%2B-3776ab?logo=python&logoColor=white)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Jupyter](https://img.shields.io/badge/jupyter-notebook-f37626?logo=jupyter&logoColor=white)](https://jupyter.org/)
-[![nbQA](https://img.shields.io/badge/linting-nbQA-blue)](https://github.com/nbQA-dev/nbQA)
-[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
-[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025e8c?logo=dependabot)](https://docs.github.com/en/code-security/dependabot)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python 3.12+](https://img.shields.io/badge/Python-3.12%2B-blue.svg)](https://www.python.org/downloads/)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-orange.svg)](https://jupyter.org/)
+[![NSIP](https://img.shields.io/badge/NSIP-Katahdin-brightgreen.svg)](https://github.com/zircote/nsip)
 
-A collection of Jupyter notebooks for experiments and learning.
+Beginner-friendly [Jupyter notebooks](https://jupyter.org/) (interactive documents that mix text, code, and charts) for farmers, ranchers, and agronomists. Whether you're tracking soil health, managing livestock genetics, writing grant applications, or planning grazing rotations, these notebooks provide practical, hands-on tools you can adapt to your operation.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/social-preview-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/social-preview.svg">
+  <img alt="Farm Notebook Examples - Jupyter notebooks for farmers, ranchers and agronomists" src=".github/social-preview.svg" width="100%">
+</picture>
+
+## Who Is This For?
+
+- **Farmers and ranchers** looking to use data for better decisions
+- **Agronomists** wanting reproducible analysis templates
+- **Grant writers** building data-backed proposals for EQIP, CSP, SARE, and other programs
+- **Katahdin sheep breeders** working with NSIP (National Sheep Improvement Program) genetic data
+
+## Notebooks
+
+<p align="center">
+  <img src=".github/readme-infographic.svg" alt="Overview of all 7 notebooks" width="700">
+</p>
+
+| Notebook | Description |
+|---|---|
+| [Getting Started](notebooks/getting-started.ipynb) | Installing tools, Jupyter basics, first NSIP query |
+| [NSIP Sheep Genetics](notebooks/nsip-sheep-genetics.ipynb) | EBVs (Estimated Breeding Values), ram comparison, mating recommendations |
+| [Grant Writing for Farms](notebooks/grant-writing-for-farms.ipynb) | EQIP/CSP/SARE proposals with budget templates |
+| [Soil Testing Guide](notebooks/soil-testing-guide.ipynb) | Lab report interpretation, amendment calculations |
+| [Ecological Monitoring (EOV)](notebooks/ecological-monitoring-eov.ipynb) | Savory Institute indicators, site assessments |
+| [Livestock Health Records](notebooks/livestock-health-records.ipynb) | Vaccinations, FAMACHA, growth curves |
+| [Pasture and Grazing Management](notebooks/pasture-grazing-management.ipynb) | Carrying capacity, rotation planning, forage budgets |
+
+## Prerequisites
+
+- Python 3.12+
+- [git](https://git-scm.com/downloads)
+- [uv](https://docs.astral.sh/uv/) package manager
+- [just](https://github.com/casey/just) task runner
+- [NSIP CLI](https://github.com/zircote/nsip) (for genetics notebooks)
 
 ## Quick Start
 
-### Prerequisites
-
-- Python 3.12+
-- [uv](https://docs.astral.sh/uv/) package manager
-
-### Setup
+The recommended path uses `just`, which runs all setup steps (including the NSIP CLI (command-line interface) install) in one command:
 
 ```bash
 # Clone the repository
-git clone https://github.com/zircote/{{notebook_project}}.git
-cd {{notebook_project}}
+git clone https://github.com/zircote/farm-notebook-examples.git
+cd farm-notebook-examples
 
-# Install dependencies
-uv sync
+# Full setup: install all dependencies + NSIP CLI
+just setup
 
 # Start Jupyter
-uv run jupyter notebook
+just lab
 ```
 
-### With Data Science Packages
+Or, if you prefer manual steps without `just`:
 
 ```bash
-# Install with pandas, numpy, matplotlib
+# Install dependencies (includes pandas, numpy, matplotlib, tabulate)
 uv sync --extra data
 
-# Start JupyterLab
+# Start Jupyter
 uv run jupyter lab
 ```
 
-## Project Structure
+Open `notebooks/getting-started.ipynb` to begin.
 
-```
-notebooks/           # All Jupyter notebooks
-├── example.ipynb    # Example notebook template
-└── *.ipynb          # Your experiment notebooks
-```
+> **Don't want to install anything?** You can run the notebooks in the cloud with Google Colab or GitHub Codespaces. See [INSTALL.md](INSTALL.md#cloud-alternatives-no-install-required) for details.
 
-## Development
+## Getting Help with Installation
 
-### Linting Notebooks
+- **[INSTALL.md](INSTALL.md)** -- Quick setup, cloud alternatives, and all available `just` commands
+- **[SETUP.md](SETUP.md)** -- Detailed step-by-step instructions for every tool, including Windows walkthroughs
+
+## For Contributors
+
+### Development
+
+Linting and formatting require the dev extras:
 
 ```bash
-# Check for issues
-uv run nbqa ruff notebooks/
+just install          # Installs data + dev extras (includes nbqa and ruff)
+
+# Lint notebooks
+just lint
 
 # Auto-fix issues
-uv run nbqa ruff --fix notebooks/
+just fix
 ```
-
-### Adding Dependencies
-
-```bash
-# Add a package
-uv add requests
-
-# Add to data extras group
-uv add --optional data scikit-learn
-```
-
-## Notebook Guidelines
-
-1. **Clear documentation**: Start with a title and purpose
-2. **Organized cells**: Imports first, then data, then analysis
-3. **Small cells**: One logical operation per cell
-4. **Clear outputs**: Clear before committing (optional)
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b experiment/topic-name`)
-3. Add your notebook to `notebooks/`
-4. Run linting (`uv run nbqa ruff notebooks/`)
-5. Commit your changes
-6. Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT - see [LICENSE](LICENSE) for details.
