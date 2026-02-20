@@ -88,6 +88,9 @@ Linting and formatting require the dev extras:
 ```bash
 just install          # Installs data + dev extras (includes nbqa and ruff)
 
+# Run CI checks (validate + lint; no NSIP CLI required)
+just ci
+
 # Lint notebooks
 just lint
 

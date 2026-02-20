@@ -582,6 +582,7 @@ You can also check individual components:
 just versions       # Show all tool versions
 just validate       # Check notebooks are valid JSON
 just lint           # Run ruff linter on all notebooks
+just ci             # Run CI checks (validate + lint, no NSIP required)
 just check-nsip     # Verify NSIP CLI works
 just info           # Show notebook cell counts and sizes
 ```
