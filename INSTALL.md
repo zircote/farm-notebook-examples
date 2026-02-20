@@ -72,6 +72,7 @@ Run `just` with no arguments to see every available recipe.
 | `just validate` | Validate all notebooks are well-formed JSON |
 | `just check-nsip` | Verify NSIP CLI is working |
 | `just check` | Run all checks (validate, lint, NSIP) |
+| `just ci` | Run CI checks without NSIP (validate + lint only) |
 | `just info` | Show notebook inventory (cell counts, sizes) |
 | `just versions` | Show installed tool versions |
 

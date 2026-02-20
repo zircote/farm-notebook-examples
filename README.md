@@ -81,6 +81,8 @@ Open `notebooks/getting-started.ipynb` to begin.
 
 ## For Contributors
 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the full guide. Quick reference:
+
 ### Development
 
 Linting and formatting require the dev extras:
