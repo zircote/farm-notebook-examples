@@ -54,7 +54,7 @@ jobs:
       comment_repo: ""
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@9f949b2105c428511b5db50d1bd5a6f00ec0a659 # v0.65.0
+        uses: github/gh-aw/actions/setup@a91e3d2deadaf27496e563b7a4591125e1093d22 # v0.65.0
         with:
           destination: /opt/gh-aw/actions
       - name: Validate context variables
@@ -229,7 +229,7 @@ jobs:
         run: bash /opt/gh-aw/actions/print_prompt_summary.sh
       - name: Upload prompt artifact
         if: success()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: prompt
           path: /tmp/gh-aw/aw-prompts/prompt.txt
@@ -260,7 +260,7 @@ jobs:
       secret_verification_result: ${{ steps.validate-secret.outputs.verification_result }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@9f949b2105c428511b5db50d1bd5a6f00ec0a659 # v0.65.0
+        uses: github/gh-aw/actions/setup@a91e3d2deadaf27496e563b7a4591125e1093d22 # v0.65.0
         with:
           destination: /opt/gh-aw/actions
       - name: Checkout repository
@@ -861,7 +861,7 @@ jobs:
           SECRET_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Safe Outputs
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: safe-output
           path: ${{ env.GH_AW_SAFE_OUTPUTS }}
@@ -883,13 +883,13 @@ jobs:
             await main();
       - name: Upload sanitized agent output
         if: always() && env.GH_AW_AGENT_OUTPUT
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: agent-output
           path: ${{ env.GH_AW_AGENT_OUTPUT }}
           if-no-files-found: warn
       - name: Upload engine output files
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: agent_outputs
           path: |
@@ -934,7 +934,7 @@ jobs:
       - name: Upload agent artifacts
         if: always()
         continue-on-error: true
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: agent-artifacts
           path: |
@@ -966,7 +966,7 @@ jobs:
       total_count: ${{ steps.missing_tool.outputs.total_count }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@9f949b2105c428511b5db50d1bd5a6f00ec0a659 # v0.65.0
+        uses: github/gh-aw/actions/setup@a91e3d2deadaf27496e563b7a4591125e1093d22 # v0.65.0
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent output artifact
@@ -1082,7 +1082,7 @@ jobs:
       success: ${{ steps.parse_results.outputs.success }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@9f949b2105c428511b5db50d1bd5a6f00ec0a659 # v0.65.0
+        uses: github/gh-aw/actions/setup@a91e3d2deadaf27496e563b7a4591125e1093d22 # v0.65.0
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent artifacts
@@ -1165,7 +1165,7 @@ jobs:
             await main();
       - name: Upload threat detection log
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: threat-detection.log
           path: /tmp/gh-aw/threat-detection/detection.log
@@ -1197,7 +1197,7 @@ jobs:
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
       - name: Setup Scripts
-        uses: github/gh-aw/actions/setup@9f949b2105c428511b5db50d1bd5a6f00ec0a659 # v0.65.0
+        uses: github/gh-aw/actions/setup@a91e3d2deadaf27496e563b7a4591125e1093d22 # v0.65.0
         with:
           destination: /opt/gh-aw/actions
       - name: Download agent output artifact
@@ -1252,7 +1252,7 @@ jobs:
             await main();
       - name: Upload safe output items manifest
         if: always()
-        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: safe-output-items
           path: /tmp/safe-output-items.jsonl
